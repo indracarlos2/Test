@@ -13,7 +13,7 @@ namespace TripletSum {
             TestTripleSum(array,15);
             TestTripleSum(array2, 8);
             TestTripleSum(array3, 795);
-            TestTripleSum(array3, 888);
+            TestTripleSum(array3, 888);  
             TestTripleSum(array3, 666);
             TestTripleSum(array3, 108);
             Console.ReadKey();
