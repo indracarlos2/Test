@@ -33,6 +33,7 @@
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="InitialDate" Type="datetime" Nullable="false" />
           <Property Name="InitialImage" Type="varbinary(max)" />
+          <Property Name="ImageMimeType" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Responses">
           <Key>
@@ -51,6 +52,31 @@
           </Key>
           <Property Name="Id_Request" Type="int" Nullable="false" />
           <Property Name="TitleMessage" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'JOlivasBD.dbo.RequestsPending' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="RequestsPending">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="TITLEMESSAGE" />
+            <PropertyRef Name="ESTATUS" />
+            <PropertyRef Name="NAME" />
+            <PropertyRef Name="EMAIL" />
+            <PropertyRef Name="PHONE" />
+            <PropertyRef Name="INITIALDATE" />
+            <PropertyRef Name="DESCRIPTION" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TITLEMESSAGE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ESTATUS" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="INITIALIMAGE" Type="varbinary(max)" />
+          <Property Name="IMAGEMIMETYPE" Type="varchar" MaxLength="50" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PHONE" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="ADDRESS" Type="varchar" MaxLength="50" />
+          <Property Name="INITIALDATE" Type="datetime" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_Commentaries_Responses">
           <End Role="Responses" Type="Self.Responses" Multiplicity="1" />
@@ -106,6 +132,21 @@
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responses" EntityType="Self.Responses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestsPending" EntityType="Self.RequestsPending" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[RequestsPending].[ID] AS [ID], 
+[RequestsPending].[TITLEMESSAGE] AS [TITLEMESSAGE], 
+[RequestsPending].[ESTATUS] AS [ESTATUS], 
+[RequestsPending].[INITIALIMAGE] AS [INITIALIMAGE], 
+[RequestsPending].[IMAGEMIMETYPE] AS [IMAGEMIMETYPE], 
+[RequestsPending].[NAME] AS [NAME], 
+[RequestsPending].[EMAIL] AS [EMAIL], 
+[RequestsPending].[PHONE] AS [PHONE], 
+[RequestsPending].[ADDRESS] AS [ADDRESS], 
+[RequestsPending].[INITIALDATE] AS [INITIALDATE], 
+[RequestsPending].[DESCRIPTION] AS [DESCRIPTION]
+FROM [dbo].[RequestsPending] AS [RequestsPending]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Commentaries_Responses" Association="Self.FK_Commentaries_Responses">
             <End Role="Responses" EntitySet="Responses" />
             <End Role="Commentaries" EntitySet="Commentaries" />
@@ -139,6 +180,7 @@
           <NavigationProperty Name="Title" Relationship="Self.FK_Titles_ToRequest" FromRole="Requests" ToRole="Titles" />
           <NavigationProperty Name="Contact" Relationship="RestorationStoreBDModel.FK_Contacts_Requests" FromRole="Request" ToRole="Contact" />
           <NavigationProperty Name="Responses" Relationship="RestorationStoreBDModel.FK_Responses_Requests" FromRole="Request" ToRole="Respons" />
+          <Property Name="ImageMimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Title">
           <Key>
@@ -182,6 +224,7 @@
             <End Role="Request" EntitySet="Requests" />
             <End Role="Respons" EntitySet="Responses" />
           </AssociationSet>
+          <EntitySet Name="RequestsPendings" EntityType="RestorationStoreBDModel.RequestsPending" />
         </EntityContainer>
         <EntityType Name="Commentary">
           <Key>
@@ -253,6 +296,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RequestsPending">
+          <Key>
+            <PropertyRef Name="TITLEMESSAGE" />
+            <PropertyRef Name="ESTATUS" />
+            <PropertyRef Name="NAME" />
+            <PropertyRef Name="EMAIL" />
+            <PropertyRef Name="PHONE" />
+            <PropertyRef Name="INITIALDATE" />
+            <PropertyRef Name="DESCRIPTION" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TITLEMESSAGE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ESTATUS" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="INITIALIMAGE" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PHONE" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INITIALDATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IMAGEMIMETYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -262,6 +328,7 @@
           <EntitySetMapping Name="Requests">
             <EntityTypeMapping TypeName="RestorationStoreBDModel.Request">
               <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -308,6 +375,23 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Id_Request" ColumnName="Id_Request" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestsPendings">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.RequestsPending">
+              <MappingFragment StoreEntitySet="RequestsPending">
+                <ScalarProperty Name="IMAGEMIMETYPE" ColumnName="IMAGEMIMETYPE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="INITIALDATE" ColumnName="INITIALDATE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="PHONE" ColumnName="PHONE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="INITIALIMAGE" ColumnName="INITIALIMAGE" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+                <ScalarProperty Name="TITLEMESSAGE" ColumnName="TITLEMESSAGE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -21,9 +21,11 @@
             </div>
             <div id="templatemo_menu">
                 <ul>
-                    <li><a href="#" class="current">Home</a></li>
+                   @* <li><a href="#" class="current">Home</a></li>*@
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li><a href="#">Responses</a></li>
-                    <li><a href="#">Requests</a></li>
+                    <li>@Html.ActionLink("Requests Pendings", "Index", "RequestPending")</li>
+                    <li>@Html.ActionLink("Create Request", "Index", "Request")</li>
                 </ul>
             </div>
         </div>

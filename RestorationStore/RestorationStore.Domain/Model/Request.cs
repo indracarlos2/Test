@@ -24,6 +24,7 @@ namespace RestorationStore.Domain.Model
         public string Description { get; set; }
         public System.DateTime InitialDate { get; set; }
         public byte[] InitialImage { get; set; }
+        public string ImageMimeType { get; set; }
     
         public virtual Title Title { get; set; }
         public virtual Contact Contact { get; set; }

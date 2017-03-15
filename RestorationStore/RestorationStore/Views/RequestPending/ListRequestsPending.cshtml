@@ -1,0 +1,85 @@
+﻿@model IEnumerable<RestorationStore.Domain.Model.RequestsPending>
+
+@{
+    ViewBag.Title = "List of Requests Pending";
+}
+
+<h2>List of Requests Pending</h2>
+
+<table>
+    <tr>
+        <th>
+            
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TITLEMESSAGE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ESTATUS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHONE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.INITIALDATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if(item.INITIALIMAGE != null) {
+                <div style="float:left;margin-right:20px">
+                    <img width="75" height="75"
+                         src="@Url.Action("GetImage",
+                                      "RequestPending",
+                                    new { item.ID })" />
+                </div>
+            }
+        </td>
+        <td>
+            @Html.ActionLink(item.TITLEMESSAGE, "ListRequestsPending", new { id_request = item.ID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ESTATUS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHONE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ADDRESS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.INITIALDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+        </td>
+        <td>
+          @*  @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |*@
+        @*    @Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
+           @* @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+        </td>
+    </tr>
+}
+
+</table>
