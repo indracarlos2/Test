@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RestorationStoreBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Commentaries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Author" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id_Response" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="Id_Request" />
+          </Key>
+          <Property Name="Id_Request" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estatus" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="InitialDate" Type="datetime" Nullable="false" />
+          <Property Name="InitialImage" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Responses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Request" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="FinalDate" Type="datetime" Nullable="false" />
+          <Property Name="FinalImage" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Titles">
+          <Key>
+            <PropertyRef Name="Id_Request" />
+          </Key>
+          <Property Name="Id_Request" Type="int" Nullable="false" />
+          <Property Name="TitleMessage" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Commentaries_Responses">
+          <End Role="Responses" Type="Self.Responses" Multiplicity="1" />
+          <End Role="Commentaries" Type="Self.Commentaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commentaries">
+              <PropertyRef Name="Id_Response" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_Requests">
+          <End Role="Requests" Type="Self.Requests" Multiplicity="1" />
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Requests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contacts">
+              <PropertyRef Name="Id_Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responses_Requests">
+          <End Role="Requests" Type="Self.Requests" Multiplicity="1" />
+          <End Role="Responses" Type="Self.Responses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Responses">
+              <PropertyRef Name="Id_Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Titles_ToRequest">
+          <End Role="Requests" Type="Self.Requests" Multiplicity="1" />
+          <End Role="Titles" Type="Self.Titles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Requests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Titles">
+              <PropertyRef Name="Id_Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestorationStoreBDModelStoreContainer">
+          <EntitySet Name="Commentaries" EntityType="Self.Commentaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responses" EntityType="Self.Responses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Commentaries_Responses" Association="Self.FK_Commentaries_Responses">
+            <End Role="Responses" EntitySet="Responses" />
+            <End Role="Commentaries" EntitySet="Commentaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_Requests" Association="Self.FK_Contacts_Requests">
+            <End Role="Requests" EntitySet="Requests" />
+            <End Role="Contacts" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responses_Requests" Association="Self.FK_Responses_Requests">
+            <End Role="Requests" EntitySet="Requests" />
+            <End Role="Responses" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Titles_ToRequest" Association="Self.FK_Titles_ToRequest">
+            <End Role="Requests" EntitySet="Requests" />
+            <End Role="Titles" EntitySet="Titles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestorationStoreBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estatus" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InitialDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InitialImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Title" Relationship="Self.FK_Titles_ToRequest" FromRole="Requests" ToRole="Titles" />
+          <NavigationProperty Name="Contact" Relationship="RestorationStoreBDModel.FK_Contacts_Requests" FromRole="Request" ToRole="Contact" />
+          <NavigationProperty Name="Responses" Relationship="RestorationStoreBDModel.FK_Responses_Requests" FromRole="Request" ToRole="Respons" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Id_Request" />
+          </Key>
+          <Property Name="Id_Request" Type="Int32" Nullable="false" />
+          <Property Name="TitleMessage" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Titles_ToRequest" FromRole="Titles" ToRole="Requests" />
+        </EntityType>
+        <Association Name="FK_Titles_ToRequest">
+          <End Role="Requests" Type="Self.Request" Multiplicity="1" />
+          <End Role="Titles" Type="Self.Title" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Requests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Titles">
+              <PropertyRef Name="Id_Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestorationStoreBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Requests" EntityType="Self.Request" />
+          <EntitySet Name="Titles" EntityType="Self.Title" />
+          <AssociationSet Name="FK_Titles_ToRequest" Association="Self.FK_Titles_ToRequest">
+            <End Role="Requests" EntitySet="Requests" />
+            <End Role="Titles" EntitySet="Titles" />
+          </AssociationSet>
+          <EntitySet Name="Commentaries" EntityType="RestorationStoreBDModel.Commentary" />
+          <EntitySet Name="Contacts" EntityType="RestorationStoreBDModel.Contact" />
+          <EntitySet Name="Responses" EntityType="RestorationStoreBDModel.Respons" />
+          <AssociationSet Name="FK_Commentaries_Responses" Association="RestorationStoreBDModel.FK_Commentaries_Responses">
+            <End Role="Respons" EntitySet="Responses" />
+            <End Role="Commentary" EntitySet="Commentaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_Requests" Association="RestorationStoreBDModel.FK_Contacts_Requests">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responses_Requests" Association="RestorationStoreBDModel.FK_Responses_Requests">
+            <End Role="Request" EntitySet="Requests" />
+            <End Role="Respons" EntitySet="Responses" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Commentary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Response" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Respons" Relationship="RestorationStoreBDModel.FK_Commentaries_Responses" FromRole="Commentary" ToRole="Respons" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id_Request" />
+          </Key>
+          <Property Name="Id_Request" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Request" Relationship="RestorationStoreBDModel.FK_Contacts_Requests" FromRole="Contact" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Respons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Request" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FinalDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FinalImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Commentaries" Relationship="RestorationStoreBDModel.FK_Commentaries_Responses" FromRole="Respons" ToRole="Commentary" />
+          <NavigationProperty Name="Request" Relationship="RestorationStoreBDModel.FK_Responses_Requests" FromRole="Respons" ToRole="Request" />
+        </EntityType>
+        <Association Name="FK_Commentaries_Responses">
+          <End Type="RestorationStoreBDModel.Respons" Role="Respons" Multiplicity="1" />
+          <End Type="RestorationStoreBDModel.Commentary" Role="Commentary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Respons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Commentary">
+              <PropertyRef Name="Id_Response" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_Requests">
+          <End Type="RestorationStoreBDModel.Request" Role="Request" Multiplicity="1" />
+          <End Type="RestorationStoreBDModel.Contact" Role="Contact" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="Id_Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responses_Requests">
+          <End Type="RestorationStoreBDModel.Request" Role="Request" Multiplicity="1" />
+          <End Type="RestorationStoreBDModel.Respons" Role="Respons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Respons">
+              <PropertyRef Name="Id_Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestorationStoreBDModelStoreContainer" CdmEntityContainer="RestorationStoreBDEntities">
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.Request">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InitialDate" ColumnName="InitialDate" />
+                <ScalarProperty Name="InitialImage" ColumnName="InitialImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.Title">
+              <MappingFragment StoreEntitySet="Titles">
+                <ScalarProperty Name="Id_Request" ColumnName="Id_Request" />
+                <ScalarProperty Name="TitleMessage" ColumnName="TitleMessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commentaries">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.Commentary">
+              <MappingFragment StoreEntitySet="Commentaries">
+                <ScalarProperty Name="Id_Response" ColumnName="Id_Response" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_Request" ColumnName="Id_Request" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.Respons">
+              <MappingFragment StoreEntitySet="Responses">
+                <ScalarProperty Name="FinalImage" ColumnName="FinalImage" />
+                <ScalarProperty Name="FinalDate" ColumnName="FinalDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Id_Request" ColumnName="Id_Request" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

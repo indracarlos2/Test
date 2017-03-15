@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="templatemo_container">
+        <div id="templatemo_header">
+            <div id="templatemo_header_logo">
+                <div id="templatemo_header_slogan">
+
+                </div>
+
+                <div id="templatemo_search">
+                    <form action="#" method="post"></form>
+                </div>
+            </div>
+            <div id="templatemo_menu">
+                <ul>
+                    <li><a href="#" class="current">Home</a></li>
+                    <li><a href="#">Responses</a></li>
+                    <li><a href="#">Requests</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="templatemo_section_1">
+            <div class="templatemo_section_1_contentarea">
+                @RenderBody()
+            </div>
+            <div class="cleaner"></div>
+            <div class="templatemo_section_1_bottom">
+            </div>
+        </div>
+        <div class="cleaner"></div>
+        <div id="templatemo_footer">
+            Copyright © 2024 <a href="#">Your Company Name</a>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
