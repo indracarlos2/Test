@@ -1,0 +1,29 @@
+﻿@model RestorationStore.Domain.Model.Request
+
+@{
+    ViewBag.Title = "Start Request";
+}
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+<h2>Start Request</h2>
+
+    <div id="myId">
+@using(Ajax.BeginForm(
+        new AjaxOptions {
+            HttpMethod = "POST",
+            Url = "SetInProgress?id_request=" +Model.Id,
+            UpdateTargetId = "myId"
+        })) {
+            <fieldset>
+                <legend>Request</legend>
+               @Html.Partial("DetailRequestFullPartial",Model)
+                <p>
+                    <button id="submitEditPost" type="submit">Start Request</button>
+                    @Html.ActionLink("Back to the list of pending requests",
+                             "Index",
+                             "RequestPending")
+                </p>
+            </fieldset>
+}
+    </div>

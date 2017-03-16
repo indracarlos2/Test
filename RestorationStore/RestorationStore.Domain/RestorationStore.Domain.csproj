@@ -82,7 +82,9 @@
       <DependentUpon>RestorationStoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ViewModel\ContactViewModel.cs" />
+    <Compile Include="Model\ViewModel\RequestPendingViewModel.cs" />
     <Compile Include="Model\ViewModel\RequestViewModel.cs" />
+    <Compile Include="Model\ViewModel\ResponseViewModel.cs" />
     <Compile Include="Model\ViewModel\TitleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />

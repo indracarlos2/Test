@@ -12,7 +12,7 @@
         <div id="templatemo_header">
             <div id="templatemo_header_logo">
                 <div id="templatemo_header_slogan">
-
+                    <h4 class="titlepage"> Restoration Store</h4>
                 </div>
 
                 <div id="templatemo_search">
@@ -21,9 +21,9 @@
             </div>
             <div id="templatemo_menu">
                 <ul>
-                   @* <li><a href="#" class="current">Home</a></li>*@
+                  
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li><a href="#">Responses</a></li>
+                    <li>@Html.ActionLink("Completed requests", "GetAllResponses", "Response")</li>
                     <li>@Html.ActionLink("Requests Pendings", "Index", "RequestPending")</li>
                     <li>@Html.ActionLink("Create Request", "Index", "Request")</li>
                 </ul>
@@ -39,7 +39,7 @@
         </div>
         <div class="cleaner"></div>
         <div id="templatemo_footer">
-            Copyright © 2024 <a href="#">Your Company Name</a>
+            Copyright © 1988 @Html.ActionLink("Restoration Store Company", "Index", "Home")
         </div>
     </div>
 

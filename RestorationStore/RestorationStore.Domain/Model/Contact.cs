@@ -11,7 +11,9 @@ namespace RestorationStore.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using RestorationStore.Domain.Model.ViewModel;
+    [MetadataType(typeof(ContactViewModel))]
     public partial class Contact
     {
         public int Id_Request { get; set; }

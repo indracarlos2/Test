@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<RestorationStore.Domain.Model.RequestsPending>
 
 @{
-    ViewBag.Title = "List of Requests Pending";
+    ViewBag.Title = "List of requests";
 }
 
-<h2>List of Requests Pending</h2>
+<h2>List of requests</h2>
 
 <table>
     <tr>
@@ -42,16 +42,16 @@
     <tr>
         <td>
             @if(item.INITIALIMAGE != null) {
-                <div style="float:left;margin-right:20px">
-                    <img width="75" height="75"
-                         src="@Url.Action("GetImage",
-                                      "RequestPending",
-                                    new { item.ID })" />
-                </div>
+            <div style="float:left;margin-right:20px">
+                <img width="75" height="75"
+                        src="@Url.Action("GetImage",
+                                    "Request",
+                        new { id_request=item.ID })" />
+            </div>
             }
         </td>
         <td>
-            @Html.ActionLink(item.TITLEMESSAGE, "ListRequestsPending", new { id_request = item.ID })
+            @Html.DisplayFor(modelItem => item.TITLEMESSAGE)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ESTATUS)
@@ -75,9 +75,12 @@
             @Html.DisplayFor(modelItem => item.DESCRIPTION)
         </td>
         <td>
-          @*  @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |*@
-        @*    @Html.ActionLink("Details", "Details", new { id=item.ID }) |*@
-           @* @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+            @if(item.ESTATUS=="Pending"){
+                @Html.ActionLink("Start", "StartRequest", new { id_request = item.ID })
+            } else {
+                 <div>@Html.ActionLink("Stop", "SetInStop", "Request", new { id_request = item.ID }, null) </div>
+                 <div>@Html.ActionLink( "Complete", "CreateResponse", "Response", new { id_request = item.ID },null)</div>
+            }
         </td>
     </tr>
 }

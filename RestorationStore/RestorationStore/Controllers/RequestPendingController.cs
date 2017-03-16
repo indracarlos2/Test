@@ -20,15 +20,10 @@ namespace RestorationStore.Controllers
             return View();
         }
 
-        public FileContentResult GetImage(int ID) {
-            System.Linq.Expressions.Expression<Func<RequestsPending, bool>>
-                expr = x => x.ID == ID;
-          RequestsPending request = requestsPendingContext.FindOne(expr);
-          if(request != null) {
-              return File(request.INITIALIMAGE, request.IMAGEMIMETYPE);
-            } else {
-                return null;
-            }
+        public ActionResult StartRequest(int id_request) {
+            return RedirectToAction("StartRequest",  
+                                         "Request", 
+                                         new { id_request=id_request });
         }
 
     }

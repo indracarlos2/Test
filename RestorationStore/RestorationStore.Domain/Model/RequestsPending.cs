@@ -11,7 +11,10 @@ namespace RestorationStore.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using RestorationStore.Domain.Model.ViewModel;
+
+    [MetadataType(typeof(RequestPendingViewModel))]
     public partial class RequestsPending
     {
         public string TITLEMESSAGE { get; set; }

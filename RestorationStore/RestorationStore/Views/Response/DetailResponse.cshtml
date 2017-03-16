@@ -1,0 +1,81 @@
+﻿@model RestorationStore.Domain.Model.Respons
+
+@{
+    ViewBag.Title = "Detail completed request";
+}
+
+<h2>Detail completed request</h2>
+<div>
+    <div id="pan_izquierdo">
+
+            <fieldset>
+                <legend>Respons</legend>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Request.Title.TitleMessage)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Request.Title.TitleMessage)
+                </div>
+                <div>
+                    @if(@Model.Id != null) {
+                        <div class="editor-label">Final Image</div>
+                        <div class="editor-field">
+                            <img width="100" height="100"
+                                 src="@Url.Action("GetImage",
+                                    "Response",
+                        new { id=@Model.Id })" />
+                        </div>
+                    }
+                </div>
+                <div>
+                    @if(@Model.Id != null) {
+                        <div class="editor-label">Initial Image</div>
+                        <div class="editor-field">
+                            <img width="100" height="100"
+                                 src="@Url.Action("GetImage",
+                                    "Request",
+                        new { id_request=@Model.Id_Request })" />
+                        </div>
+                    }
+                </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Cost)
+                </div>
+                <div class="display-field">
+                   $ @Html.DisplayFor(model => model.Cost)
+                </div>
+                <div class="display-label">
+                   Final description
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+                <div class="display-label">
+                    Initial description
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Request.Description)
+                </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FinalDate)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FinalDate)
+                </div>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Request.InitialDate)
+                </div>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Request.InitialDate)
+                </div>
+            </fieldset>
+    </div>
+
+    <div id="pan_centro">
+        <fieldset>
+            <legend>Comentaries</legend>
+            <div>
+            </div>
+        </fieldset>
+    </div>
+</div>

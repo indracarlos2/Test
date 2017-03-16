@@ -17,3 +17,6 @@ namespace RestorationStore.Domain.Model.ViewModel {
         public string TitleMessage { get; set; }
     }
 }
+//using System.ComponentModel.DataAnnotations;
+//    using RestorationStore.Domain.Model.ViewModel;
+//    [MetadataType(typeof(TitleViewModel))]

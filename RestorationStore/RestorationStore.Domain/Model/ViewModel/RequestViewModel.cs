@@ -16,8 +16,8 @@ namespace RestorationStore.Domain.Model.ViewModel {
         public string Estatus { get; set; }
 
         [DisplayName("Description")]
-        [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Please, introduce the description")]
+        //[DataType(DataType.MultilineText)]
+        //[Required(ErrorMessage = "Please, introduce the description")]
         [StringLength(500, MinimumLength = 0, ErrorMessage = "Please, no more than 500 characters")]
         public string Description { get; set; }
 
@@ -27,5 +27,11 @@ namespace RestorationStore.Domain.Model.ViewModel {
         
         [HiddenInput(DisplayValue = false)]
         public byte[] InitialImage { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string ImageMimeType { get; set; }
     }
 }
+  //using System.ComponentModel.DataAnnotations;
+  //  using RestorationStore.Domain.Model.ViewModel;
+  //  [MetadataType(typeof(RequestViewModel))]

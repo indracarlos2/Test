@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\RequestPendingController.cs" />
+    <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +216,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Request\CreateRequest.js" />
+    <Content Include="Scripts\Request\StartRequest.js" />
+    <Content Include="Scripts\Validation\ImageSize.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -230,6 +234,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Request\CreateRequest.cshtml" />
     <Content Include="Views\RequestPending\ListRequestsPending.cshtml" />
+    <Content Include="Views\Request\StartRequest.cshtml" />
+    <Content Include="Views\Request\DetailRequestFullPartial.cshtml" />
+    <Content Include="Views\Request\SetInStop.cshtml" />
+    <Content Include="Views\Response\CreateResponse.cshtml" />
+    <Content Include="Views\Response\GetAllResponses.cshtml" />
+    <Content Include="Views\Response\DetailResponse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

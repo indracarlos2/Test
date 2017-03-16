@@ -11,7 +11,9 @@ namespace RestorationStore.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using RestorationStore.Domain.Model.ViewModel;
+    [MetadataType(typeof(TitleViewModel))]
     public partial class Title
     {
         public int Id_Request { get; set; }

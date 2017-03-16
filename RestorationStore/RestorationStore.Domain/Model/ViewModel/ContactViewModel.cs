@@ -34,3 +34,6 @@ namespace RestorationStore.Domain.Model.ViewModel {
         public string Address { get; set; }
     }
 }
+ //using System.ComponentModel.DataAnnotations;
+ //   using RestorationStore.Domain.Model.ViewModel;
+ //   [MetadataType(typeof(ContactViewModel))]

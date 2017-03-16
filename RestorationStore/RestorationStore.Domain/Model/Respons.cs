@@ -11,7 +11,9 @@ namespace RestorationStore.Domain.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using RestorationStore.Domain.Model.ViewModel;
+    [MetadataType(typeof(ResponseViewModel))]
     public partial class Respons
     {
         public Respons()
@@ -25,6 +27,7 @@ namespace RestorationStore.Domain.Model
         public string Description { get; set; }
         public System.DateTime FinalDate { get; set; }
         public byte[] FinalImage { get; set; }
+        public string ImageMimeType { get; set; }
     
         public virtual ICollection<Commentary> Commentaries { get; set; }
         public virtual Request Request { get; set; }
