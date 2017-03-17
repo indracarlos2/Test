@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Login";
 }
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/Utils/jquery.maskedinput-1.2.2.js" type="text/javascript"></script>
+    <script src="~/Scripts/Account/Login.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
 <legend>Login</legend>
 <p>Please log in to access the administrative area</p>
 @using(Html.BeginForm()) {

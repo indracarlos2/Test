@@ -27,7 +27,9 @@ namespace RestorationStore.Controllers {
                 }
                 request.Estatus = "Pending";
                 request.InitialDate = System.DateTime.Now;
-              
+                if(request.Contact.Phone!=null){
+                    request.Contact.Phone = request.Contact.Phone.Replace("-", "");
+                }
                requestContext.Add(request);
                requestContext.Save();
                 return RedirectToAction("Index","Home");

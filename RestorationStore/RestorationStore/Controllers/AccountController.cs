@@ -18,6 +18,9 @@ namespace RestorationStore.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model, string returnUrl) {
             if(ModelState.IsValid) {
+                if(model.Usuario!=null){
+                    model.Usuario = model.Usuario.Replace("-","");
+                }
                 if(authProvider.Authenticate(model.Usuario, model.Password)) {
                     return Redirect(returnUrl ?? Url.Action("Index", "Home"));
                 } else {
