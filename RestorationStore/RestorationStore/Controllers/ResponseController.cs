@@ -11,16 +11,20 @@ namespace RestorationStore.Controllers
     {
         Repository<Respons> responseContext = new Repository<Respons>();
         Repository<Request> requestContext = new Repository<Request>();
+        [Authorize]
         [HttpGet]
         public ActionResult CreateResponse(int id_request) {
             Respons response = new Respons();
             Request request = requestContext.FindOneForId(id_request);
+            if(request==null){
+                return RedirectToAction("Index","Home");
+            }
             response.Request = request;
             response.Cost = 1;
             response.Id_Request = request.Id;
             return View("CreateResponse",response);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult CreateResponse(Respons response, 
                                            HttpPostedFileBase image) {
@@ -62,6 +66,9 @@ namespace RestorationStore.Controllers
         [HttpGet]
         public ActionResult DetailResponse(int id) {
             Respons response = responseContext.FindOneForId(id);
+            if(response==null){
+                return RedirectToAction("Index","Home");
+            }
             return View(response);
         }
     }

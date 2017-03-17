@@ -16,16 +16,28 @@
                 </div>
 
                 <div id="templatemo_search">
-                    <form action="#" method="post"></form>
+                    <form action="#" method="post">
+                        <ul>
+                           
+                        </ul>
+                    </form>
                 </div>
             </div>
             <div id="templatemo_menu">
                 <ul>
-                  
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Completed requests", "GetAllResponses", "Response")</li>
-                    <li>@Html.ActionLink("Requests Pendings", "Index", "RequestPending")</li>
                     <li>@Html.ActionLink("Create Request", "Index", "Request")</li>
+                    @if(Session["UserRole"] == null) {
+                        <li>@Html.ActionLink("Log In", "Login", "Account")</li>
+                    } else {
+                        
+                        <li>@Html.ActionLink("Requests Pendings", "Index", "RequestPending")</li>
+                        if("ShopOwner".Equals((String)Session["UserRole"])) {
+                            <li>@Html.ActionLink("Sales Reports", "Index", "Graphic")</li>
+                        }
+                        <li>@Html.ActionLink("Log Out", "LogOut", "Account")</li>
+                    }
                 </ul>
             </div>
         </div>

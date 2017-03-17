@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using RestorationStore.Domain.Model;
 using RestorationStore.Domain;
-namespace RestorationStore.Controllers
-{
+namespace RestorationStore.Controllers {
+    [Authorize]
     public class RequestPendingController : Controller
     {
         Repository<RequestsPending> requestsPendingContext = new Repository<RequestsPending>();

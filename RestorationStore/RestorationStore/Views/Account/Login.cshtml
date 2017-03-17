@@ -1,0 +1,12 @@
+﻿@model RestorationStore.Domain.Model.ViewModel.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+<legend>Login</legend>
+<p>Please log in to access the administrative area</p>
+@using(Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <p><input type="submit" value="Login" /></p>
+}

@@ -31,5 +31,6 @@ namespace RestorationStore.Domain.Model
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Respons> Responses { get; set; }
         public DbSet<RequestsPending> RequestsPendings { get; set; }
+        public DbSet<Login> Logins { get; set; }
     }
 }

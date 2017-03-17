@@ -5,16 +5,17 @@ using System.Web;
 using System.Web.Mvc;
 using RestorationStore.Domain.Model;
 using RestorationStore.Domain;
-namespace RestorationStore.Controllers
-{
+namespace RestorationStore.Controllers {
+    [Authorize]
     public class RequestController : Controller
     {
         Repository<Request> requestContext = new Repository<Request>();
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(){
             return View("CreateRequest");
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult CreateRequest(Request request,
                                           HttpPostedFileBase image) {
@@ -33,14 +34,18 @@ namespace RestorationStore.Controllers
             }
             return View(request);
         }
-
+       
         [HttpGet]
         public ActionResult StartRequest(int id_request) {
             System.Linq.Expressions.Expression<Func<Request, bool>>
                expr = x => x.Id == id_request;
-            return View(requestContext.FindOne(expr));
+            Request request = requestContext.FindOne(expr);
+            if(request==null){
+                return RedirectToAction("Index","Home");
+            }
+            return View(request);
         }
-
+        
         [HttpPost]
         public string SetInProgress(int  id_request) {
             System.Linq.Expressions.Expression<Func<Request, bool>>
@@ -54,15 +59,18 @@ namespace RestorationStore.Controllers
             }
             return "<h2>Sorry!!!The request does not exist!!!</h2>";
         }
-
+        
         [HttpGet]
         public ActionResult SetInStop(int id_request) {
             System.Linq.Expressions.Expression<Func<Request, bool>>
                expr = x => x.Id == id_request;
             Request request = requestContext.FindOne(expr);
+            if(request == null) {
+                return RedirectToAction("Index", "Home");
+            }
             return View(request);
         }
-
+       
         [HttpPost]
         public string SetInStopRequest(int id_request) {
             System.Linq.Expressions.Expression<Func<Request, bool>>
@@ -77,6 +85,7 @@ namespace RestorationStore.Controllers
             return "<h2>Sorry!!!The request does not exist!!!</h2>";
         }
 
+        [AllowAnonymous]
         public FileContentResult GetImage(int id_request) {
             Request request = requestContext.FindOneForId(id_request);
             if(request != null) {

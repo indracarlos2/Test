@@ -32,3 +32,6 @@ namespace RestorationStore.Domain.Model.ViewModel {
         public byte[] FinalImage { get; set; }
     }
 }
+ //using System.ComponentModel.DataAnnotations;
+ //   using RestorationStore.Domain.Model.ViewModel;
+ //   [MetadataType(typeof(ResponseViewModel))]

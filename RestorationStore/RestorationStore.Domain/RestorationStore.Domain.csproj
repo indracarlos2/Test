@@ -54,6 +54,9 @@
     <Compile Include="Model\Contact.cs">
       <DependentUpon>RestorationStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Login.cs">
+      <DependentUpon>RestorationStoreModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Request.cs">
       <DependentUpon>RestorationStoreModel.tt</DependentUpon>
     </Compile>
@@ -81,7 +84,9 @@
     <Compile Include="Model\Title.cs">
       <DependentUpon>RestorationStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\ViewModel\CommentaryViewModel.cs" />
     <Compile Include="Model\ViewModel\ContactViewModel.cs" />
+    <Compile Include="Model\ViewModel\LoginViewModel.cs" />
     <Compile Include="Model\ViewModel\RequestPendingViewModel.cs" />
     <Compile Include="Model\ViewModel\RequestViewModel.cs" />
     <Compile Include="Model\ViewModel\ResponseViewModel.cs" />

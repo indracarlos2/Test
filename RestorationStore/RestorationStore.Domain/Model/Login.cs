@@ -13,14 +13,11 @@ namespace RestorationStore.Domain.Model
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using RestorationStore.Domain.Model.ViewModel;
-    [MetadataType(typeof(CommentaryViewModel))]
-    public partial class Commentary
+    [MetadataType(typeof(LoginViewModel))]
+    public partial class Login
     {
-        public int Id { get; set; }
-        public string Author { get; set; }
-        public string Message { get; set; }
-        public int Id_Response { get; set; }
-    
-        public virtual Respons Respons { get; set; }
+        public string Usuario { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
     }
 }

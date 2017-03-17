@@ -24,6 +24,14 @@
           <Property Name="Phone" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Usuario" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Requests">
           <Key>
             <PropertyRef Name="Id" />
@@ -130,6 +138,7 @@ advertencia 6002: La tabla o vista 'JOlivasBD.dbo.RequestsPending' no tiene defi
         <EntityContainer Name="RestorationStoreBDModelStoreContainer">
           <EntitySet Name="Commentaries" EntityType="Self.Commentaries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responses" EntityType="Self.Responses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
@@ -226,6 +235,7 @@ FROM [dbo].[RequestsPending] AS [RequestsPending]</DefiningQuery>
             <End Role="Respons" EntitySet="Responses" />
           </AssociationSet>
           <EntitySet Name="RequestsPendings" EntityType="RestorationStoreBDModel.RequestsPending" />
+          <EntitySet Name="Logins" EntityType="RestorationStoreBDModel.Login" />
         </EntityContainer>
         <EntityType Name="Commentary">
           <Key>
@@ -321,6 +331,14 @@ FROM [dbo].[RequestsPending] AS [RequestsPending]</DefiningQuery>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="IMAGEMIMETYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -395,6 +413,15 @@ FROM [dbo].[RequestsPending] AS [RequestsPending]</DefiningQuery>
                 <ScalarProperty Name="INITIALIMAGE" ColumnName="INITIALIMAGE" />
                 <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
                 <ScalarProperty Name="TITLEMESSAGE" ColumnName="TITLEMESSAGE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="RestorationStoreBDModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

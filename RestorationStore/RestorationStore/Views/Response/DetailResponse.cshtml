@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "Detail completed request";
 }
-
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/Response/DetailResponse.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
 <h2>Detail completed request</h2>
 <div>
     <div id="pan_izquierdo">
@@ -73,8 +77,43 @@
 
     <div id="pan_centro">
         <fieldset>
-            <legend>Comentaries</legend>
+            <legend>Commentaries</legend>
+            <form id="messageForm">
+                @Html.Hidden("id_response", Model.Id)
+                <div class="display-label">
+                    Author
+                </div>
+                <div class="display-field">
+                    <input id="Author" name="Author" />
+                </div>
+                <div class="display-label">
+                    Commentary
+                </div>
+                <div class="display-field">
+                    <input id="Message" name="Message" 
+                           class="text-box single-line" 
+                            data-val="true" 
+                            data-val-length="Please, no more than 100 characters" 
+                            data-val-length-max="100" 
+                            data-val-length-min="1" 
+                           data-val-required="Please, introduce a commentary" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Message" data-valmsg-replace="true"></span>
+                </div>
+                
+            </form>
+            <button id="addMessage" type="submit">Add message</button>
             <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Author</th>
+                            <th>Commentary</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableCommentary">
+                        <tr><td colspan="2">The data is loading</td></tr>
+                    </tbody>
+                </table>
             </div>
         </fieldset>
     </div>

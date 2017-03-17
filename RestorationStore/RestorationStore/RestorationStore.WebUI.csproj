@@ -126,6 +126,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentaryController.cs" />
+    <Compile Include="Controllers\GraphicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\RequestPendingController.cs" />
@@ -133,6 +136,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
+    <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +207,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\Graphic\Index.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -218,6 +224,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Request\CreateRequest.js" />
     <Content Include="Scripts\Request\StartRequest.js" />
+    <Content Include="Scripts\Response\DetailResponse.js" />
     <Content Include="Scripts\Validation\ImageSize.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -240,9 +247,11 @@
     <Content Include="Views\Response\CreateResponse.cshtml" />
     <Content Include="Views\Response\GetAllResponses.cshtml" />
     <Content Include="Views\Response\DetailResponse.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Graphic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Scripts SQL\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

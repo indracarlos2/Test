@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="876bc6f90663449d90a4bec0216f7e46" Name="Diagram1">
+      <Diagram DiagramId="876bc6f90663449d90a4bec0216f7e46" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="RestorationStoreBDModel.Request" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RestorationStoreBDModel.Title" Width="1.5" PointX="3.125" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="RestorationStoreBDModel.FK_Titles_ToRequest" ManuallyRouted="false" />
@@ -15,6 +15,7 @@
         <AssociationConnector Association="RestorationStoreBDModel.FK_Contacts_Requests" />
         <AssociationConnector Association="RestorationStoreBDModel.FK_Responses_Requests" />
         <EntityTypeShape EntityType="RestorationStoreBDModel.RequestsPending" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RestorationStoreBDModel.Login" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
