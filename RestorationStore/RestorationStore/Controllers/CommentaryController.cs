@@ -43,6 +43,5 @@ namespace RestorationStore.Controllers
           }
           return false;
         }
-
     }
 }

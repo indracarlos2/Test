@@ -1,9 +1,9 @@
 ﻿function addFilter() {
+    var date = $('#date').attr('value').replace(":","");
         $.ajax({
-            type: "POST",
-            url: "Index/date?=" + $('#date').attr('value').toString()
+            type: "GET",
+            url: "Graphic/GetCurrenSales/" + date
         });
-        alert($('#date').attr('value'));
 }
 $(document).ready(function () {
     $("button").click(function (e) {

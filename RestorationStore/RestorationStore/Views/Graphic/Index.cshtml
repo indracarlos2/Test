@@ -14,7 +14,7 @@
           ['Current Sales',parseInt( $('#CurrentSales').attr('value'))]
         ]);
         var options = {
-            title: 'Sales Report'
+            title: $('#TitleReport').attr('value')
         }
        
         new google.visualization.ColumnChart(
@@ -22,14 +22,13 @@
           document.getElementById('Report')
         ).draw(data, options);
     }
-</script> 
+</script>
 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-   @* <script src="~/Scripts/Graphic/Index.js"></script>*@
+    <script src="~/Scripts/Graphic/Index.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }
-@*@using(Html.BeginForm("Index", "Graphic",
-    FormMethod.Post)) {
+@using(Html.BeginForm()) {
 <div class="editor-label">
    Select the date
 </div>
@@ -39,8 +38,9 @@
     <p>
         <button id="addFilter" type="submit">Search</button>
     </p>
-}*@
+}
 @Html.Hidden("SalesGoal", TempData["SalesGoal"])
 @Html.Hidden("CurrentSales", TempData["CurrentSales"])
+@Html.Hidden("TitleReport", TempData["TitleReport"])
 <div id="Report" style="width: 800px; height: 600px">
 </div>
