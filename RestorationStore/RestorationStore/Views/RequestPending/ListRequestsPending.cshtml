@@ -3,86 +3,93 @@
 @{
     ViewBag.Title = "List of requests";
 }
-
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript" src="~/Scripts/Utils/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/Utils/Table.js" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
 <h2>List of requests</h2>
 
-<table>
-    <tr>
-        <th>
-            
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TITLEMESSAGE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ESTATUS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMAIL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PHONE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ADDRESS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.INITIALDATE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
-        </th>
-        <th></th>
-    </tr>
+<table id="myTable" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @if(item.INITIALIMAGE != null) {
-            <div style="float:left;margin-right:20px">
-                <img width="75" height="75"
-                        src="@Url.Action("GetImage",
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TITLEMESSAGE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ESTATUS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PHONE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ADDRESS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.INITIALDATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DESCRIPTION)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model) {
+            <tr>
+                <td>
+                    @if(item.INITIALIMAGE != null) {
+                        <div style="float:left;margin-right:20px">
+                            <img width="75" height="75"
+                                 src="@Url.Action("GetImage",
                                     "Request",
                         new { id_request=item.ID })" />
-            </div>
-            }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TITLEMESSAGE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ESTATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMAIL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PHONE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ADDRESS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.INITIALDATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCRIPTION)
-        </td>
-        <td>
-            @if(item.ESTATUS=="Pending"){
-                @Html.ActionLink("Start", "StartRequest", new { id_request = item.ID })
-            } else {
-                 <div>@Html.ActionLink("Stop", "SetInStop", "Request", new { id_request = item.ID }, null) </div>
-                 <div>@Html.ActionLink( "Complete", "CreateResponse", "Response", new { id_request = item.ID },null)</div>
-            }
-        </td>
-    </tr>
-}
-
+                        </div>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TITLEMESSAGE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ESTATUS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PHONE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ADDRESS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.INITIALDATE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCRIPTION)
+                </td>
+                <td>
+                    @if(item.ESTATUS == "Pending") {
+                        @Html.ActionLink("Start", "StartRequest", new { id_request = item.ID })
+                    } else {
+                        <div>@Html.ActionLink("Stop", "SetInStop", "Request", new { id_request = item.ID }, null) </div>
+                        <div>@Html.ActionLink("Complete", "CreateResponse", "Response", new { id_request = item.ID }, null)</div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

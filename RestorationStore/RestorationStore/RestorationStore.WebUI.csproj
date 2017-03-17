@@ -206,6 +206,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Properties\PublishProfiles\Deploy.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Graphic\Index.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -224,6 +225,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Request\CreateRequest.js" />
     <Content Include="Scripts\Request\StartRequest.js" />
+    <Content Include="Scripts\Utils\jquery.dataTables.min.js" />
+    <Content Include="Scripts\Utils\Table.js" />
     <Content Include="Scripts\Response\DetailResponse.js" />
     <Content Include="Scripts\Validation\ImageSize.js" />
     <Content Include="Scripts\_references.js" />

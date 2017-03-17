@@ -25,6 +25,7 @@ namespace RestorationStore.Domain.Model.ViewModel {
         [StringLength(500, MinimumLength = 0, ErrorMessage = "Please, no more than 500 characters")]
         public string Description { get; set; }
         
+        [DisplayName("Final Date")]
         [HiddenInput(DisplayValue = true)]
         public System.DateTime FinalDate { get; set; }
 
